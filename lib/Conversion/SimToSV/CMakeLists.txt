@@ -1,5 +1,6 @@
 add_circt_conversion_library(CIRCTSimToSV
   SimToSV.cpp
+  LowerPrintFormattedProcToSV.cpp
 
   DEPENDS
   CIRCTConversionPassIncGen

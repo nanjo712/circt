@@ -13,13 +13,19 @@
 #ifndef CIRCT_CONVERSION_SIMTOSV_H
 #define CIRCT_CONVERSION_SIMTOSV_H
 
+#include "circt/Dialect/HW/HWOps.h"
 #include "circt/Support/LLVM.h"
 #include <memory>
 
 namespace circt {
 
+#define GEN_PASS_DECL_LOWERPRINTFORMATTEDPROCTOSV
 #define GEN_PASS_DECL_LOWERSIMTOSV
 #include "circt/Conversion/Passes.h.inc"
+
+namespace sim {
+LogicalResult lowerPrintFormattedProcToSV(hw::HWModuleOp module);
+} // namespace sim
 
 std::unique_ptr<mlir::Pass> createLowerSimToSVPass();
 

@@ -477,6 +477,10 @@ struct SimToSVPass : public circt::impl::LowerSimToSVBase<SimToSVPass> {
 
     std::atomic<bool> usedSynthesisMacro = false;
     auto lowerModule = [&](hw::HWModuleOp module) {
+      if (failed(lowerPrintFormattedProcToSV(module))) {
+        return failure();
+      }
+
       if (moveOpsIntoIfdefGuardsAndProcesses(module))
         usedSynthesisMacro = true;
 
